@@ -4,28 +4,22 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using CancionesApp.Datos;
+using CancionesApp.Paginas;
 
 namespace CancionesApp
 {
 	public class App : Application
 	{
-		public App ()
-		{
-			// The root page of your application
-			MainPage = new ContentPage {
-				Content = new StackLayout {
-					VerticalOptions = LayoutOptions.Center,
-					Children = {
-						new Label {
-							HorizontalTextAlignment = TextAlignment.Center,
-							Text = "Welcome to Xamarin Forms!"
-						}
-					}
-				}
-			};
-		}
+        public static AzureDataService AzureService = new AzureDataService();
 
-		protected override void OnStart ()
+        public App ()
+		{
+            SQLitePCL.Batteries.Init();
+            MainPage = new NavigationPage(new PaginaListaCanciones());
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}
